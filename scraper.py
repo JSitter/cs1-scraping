@@ -5,6 +5,9 @@
 #         string = row[3].strip("\n$")
 #         total += float(string)
 #     print(total)
+#
+
+#   Challenge 1
 
 with open("sales_data.txt") as f:
     data = list(f)
@@ -17,3 +20,57 @@ with open("sales_data.txt") as f:
         total += float(cell[3].strip("$\n"))
     print(total)
 
+# Challenge 2
+#city that had highest sales in feb
+cityDict = {}
+with open('sales_data.txt') as f:
+    listObj = list(f)
+    for line in listObj:
+        ary = line.split('\t')
+        feb = ary[1].startswith('2')
+
+        if feb:
+            city = ary[0]
+            amt = float(ary[3].strip("$\n"))
+            if(city in cityDict.keys()):
+                cityDict[city] += amt
+            else:
+                cityDict[city] = amt
+
+print(max(cityDict, key=cityDict.get))
+print("$" + str(round(cityDict[max(cityDict, key=cityDict.get)], 2)))
+
+#Challenge 3
+#out of entire data set total money paid in cash
+
+with open('sales_data.txt') as f:
+    listAry = list(f)
+    runningTotal = 0
+    for line in listAry:
+        ary = line.split("\t")
+        if ary[2] == "Cash":
+            runningTotal += float(ary[3].strip("$\n"))
+print("Total Cash amount paid...EVER")
+print("$"+str(round(runningTotal, 2)))
+
+#Challenge 4
+#What is the most populra payment type in Oakland?
+print("\n***Challenge 4\nThe most popular payment type in Oakland is")
+
+listAry = 0
+with open('sales_data.txt') as f:
+    listAry = list(f)
+
+paymentType = {}
+for line in listAry:
+    ary = line.split('\t')
+    if ary[0] == "Oakland":
+        tranPay = ary[2]
+        if tranPay in paymentType:
+            paymentType[tranPay] += 1
+        else:
+            paymentType[tranPay] = 1
+print(max(paymentType, key=paymentType.get))
+
+#Challenge 5
+#
