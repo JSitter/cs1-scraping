@@ -8,7 +8,7 @@
 #
 
 #   Challenge 1
-
+print("Air speed of unladen swallow")
 with open("sales_data.txt") as f:
     data = list(f)
     i = 0
@@ -18,10 +18,11 @@ with open("sales_data.txt") as f:
         i += 1
         cell = data[i].split("\t")
         total += float(cell[3].strip("$\n"))
-    print(total)
+    print("Total Sales Amount",round(total, 2))
 
 # Challenge 2
 #city that had highest sales in feb
+print("Start Challenge 2\nCity with highest sales in Feb")
 cityDict = {}
 with open('sales_data.txt') as f:
     listObj = list(f)
@@ -42,7 +43,7 @@ print("$" + str(round(cityDict[max(cityDict, key=cityDict.get)], 2)))
 
 #Challenge 3
 #out of entire data set total money paid in cash
-
+print("Challenge 3 *** FIGHT!\nTotal money paid in cash")
 with open('sales_data.txt') as f:
     listAry = list(f)
     runningTotal = 0
@@ -57,12 +58,13 @@ print("$"+str(round(runningTotal, 2)))
 #What is the most populra payment type in Oakland?
 print("\n***Challenge 4\nThe most popular payment type in Oakland is")
 
-listAry = 0
+listAry = []
 with open('sales_data.txt') as f:
     listAry = list(f)
 
 paymentType = {}
 for line in listAry:
+    
     ary = line.split('\t')
     if ary[0] == "Oakland":
         tranPay = ary[2]
@@ -73,4 +75,21 @@ for line in listAry:
 print(max(paymentType, key=paymentType.get))
 
 #Challenge 5
-#
+# HOw many sales were makde on 4/20 and whcih city has the highstes stales value
+ # Tally occurrences of words in a list
+
+cityary = []
+cityCt = Counter()
+citySales = Counter()
+for row in listAry:
+    ary = row.split('\t')
+    saleAmt = float(ary[3].strip("$\n"))
+    if ary[1] == "4/20":
+        cityCt[ary[0]] += 1
+        citySales[ary[0]] += saleAmt
+        maxCt = max(cityCt, key=cityCt.get)
+        maxSale = max(citySales, key=citySales.get)
+print("Challenge FIVE:")
+print("City with most sales:",maxCt)
+print("City with highest sales value:",maxSale)
+
