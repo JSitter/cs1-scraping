@@ -6,9 +6,9 @@
 #         total += float(string)
 #     print(total)
 #
-
+from collections import Counter
 #   Challenge 1
-print("Air speed of unladen swallow")
+print("**Challenge 1 **Air speed of unladen swallow")
 with open("sales_data.txt") as f:
     data = list(f)
     i = 0
@@ -22,7 +22,7 @@ with open("sales_data.txt") as f:
 
 # Challenge 2
 #city that had highest sales in feb
-print("Start Challenge 2\nCity with highest sales in Feb")
+print("\n**Start Challenge 2\nCity with highest sales in Feb")
 cityDict = {}
 with open('sales_data.txt') as f:
     listObj = list(f)
@@ -43,7 +43,7 @@ print("$" + str(round(cityDict[max(cityDict, key=cityDict.get)], 2)))
 
 #Challenge 3
 #out of entire data set total money paid in cash
-print("Challenge 3 *** FIGHT!\nTotal money paid in cash")
+print("\n**Challenge 3 *** FIGHT!\nTotal money paid in cash")
 with open('sales_data.txt') as f:
     listAry = list(f)
     runningTotal = 0
@@ -89,7 +89,32 @@ for row in listAry:
         citySales[ary[0]] += saleAmt
         maxCt = max(cityCt, key=cityCt.get)
         maxSale = max(citySales, key=citySales.get)
-print("Challenge FIVE:")
+print("\n***Challenge FIVE:")
 print("City with most sales:",maxCt)
 print("City with highest sales value:",maxSale)
 
+#Challenge 6
+print("Average Credit card purchase:")
+purchases = Counter()
+numpurch = 0
+for row in listAry:
+    ary = row.split('\t')
+    amt = float(ary[3].strip("\n$"))
+    if ary[2] == "Credit":
+        purchases[ary[2]] += amt
+        numpurch += 1
+print("$",round(purchases["Credit"]/numpurch,2))
+
+
+#Challenge 7
+#HOw many purchases were made by bartering baseball cards
+print("\n****Challenge 7\nHow many purchases were made using baseball cards")
+baseballCards = Counter()
+
+for row in listAry:
+    ary = row.split('t')
+    print(ary[2])
+    if ary[2] == "Baseball Cards":
+        baseballCards[ary[2]] += 1
+    # print(baseballCards)
+    print(baseballCards)
